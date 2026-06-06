@@ -1,21 +1,65 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <title>CLE Project</title>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+        <meta charset="utf-8"/>
+        <title>Finance Project</title>
         <link rel="stylesheet" href="index.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity="sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity="sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="katex.render(`\\text{Interest} = (1+\\frac{0.0464}{2})^\\frac{1}{6}-1\\approx0.0038298`, document.getElementById('formula'), {throwOnError: true}); katex.render(`\\text{PMT} = 415920\\frac{0.0038298(1+0.0038298)^{300}}{(1+0.0038298)^{300}-1}\\approx2334.49`, document.getElementById('formula2'));"></script>
     </head>
     <body>
-        <div id="app">
+        <h3 style="margin: 20px 20px 0;">Monthly Payment Chart</h3>
+        <div id="chart"></div>
+        <div id="content">
+            <h1>Finance Project</h1>
+            <p>Coby Qiu, Frank Xu</p>
+            <hr>
+            <h3>Chosen Home</h3>
+            <a href="https://web.archive.org/web/20260606032033/https://www.realtor.ca/real-estate/29836797/101-4841-school-draw-ave-yellowknife" target="_blank" title="Open in realtor.ca">
+                <p>101-4841 SCHOOL DRAW AVE</p>
+                <p>Yellowknife, Northwest Territories, CAN</p>
+                <p><b>$519,900.00</b> | Apartment | 101 sq meters</p>
+            </a>
             <div id="map"></div>
-            <div id="sidebar">
-                <div class="day-title" id="dayTitle"></div>
-                <div id="activityList"></div>
-            </div>
+            <hr>
+            <h3>Personal Info</h3>
+            <p>Annual salary: <b>$139,494.00</b></p>
+            <p>Marital Status: <b>Single</b></p>
+            <hr>
+            <h3>Mortgage Info</h3>
+            <p>Bank: <b>TD Canada Trust</b></p>
+            <p>Down payment: <b>20%</b> ($103,980)</p>
+            <p>Start saving down payment at age of <b>23</b> and buy at age of <b>26</b></p>
+            <p>Save $2888.33/month for the down payment ($103,980 / 3 years / 12 months)</p>
+            <p>Mortgage amount: <b>$415,920.00</b> ($519,900 - $103,980; <a href="https://ix0.apps.td.com/mortgage-affordability-calculator/" target="_blank">maximum mortgage amount: $620,854)</a></p>
+            <p>Term: <b>3 Year Fixed Closed</b></p>
+            <p>Annual Mortgage rate: <b>4.64%</b></p>
+            <p>Periods: <b>300</b> (12 months * 25 years)</p>
+            <p>Monthly Rate:</p>
+            <div id="formula" style="margin-bottom: 10px;"></div>
+            <p>Monthly Payment (Interest + Principle):</p>
+            <div id="formula2" style="margin-bottom: 10px;"></div>
+            <p><a href="https://www.td.com/ca/en/personal-banking/products/mortgages/mortgage-payment-calculator" target="_blank">Verify this value with TD mortgage calculator</a></p>
+            <p>Total Interest Paid: <b id="total">error</b></p>
+            <hr>
+            <h3>Stress Test</h3>
+            <p>Mortgage rate increase <input type="number" value="3" style="width: 30px;" min="0" max="10" id="incr">% after 3 years</p>
+            <button id="calc">Calculate</button>
+            <div id="re"></div>
+            <hr>
+            <h3>Income</h3>
+            <p>Income increase 4%, the new monthly income would be <b>$12,089.48</b> ($139,494 / 12 months * 1.04)</p>
+            <p>The new mortgage payment will be <b id="renew">[Please click the "Calculate" button above]</b> of my income</p>
+            <h3>Sell</h3>
+            <p>Home appreciate <input type="number" value="10" style="width: 30px;" min="0" max="50" id="appr">% in <b id="yrf">5</b> years</p>
+            <p>Sell this home after <input type="number" value="5" style="width: 30px;" min="2" max="20" id="yrs"> years of purchase</p>
+            <button id="calc2">Calculate</button>
+            <div id="re2"></div>
         </div>
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <p style="position: absolute; bottom: 0; margin: 20px;">Other frames or libraries used in this project: <a href="https://katex.org/" target="_blank">KaTeX</a>, <a href="https://leafletjs.com/" target="_blank">Leaflet</a></p>
         <script src="index.js"></script>
     </body>
 </html>
-
